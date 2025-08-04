@@ -1,0 +1,110 @@
+.archive-page {
+  padding: 30px 50px;
+  min-height: 100vh;
+  background: radial-gradient(circle at center, #2e0066 0%, #000000 90%);
+  color: #f0f0f0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.archive-page h2 {
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+  color: #bb86fc;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.no-archived {
+  text-align: center;
+  color: #bbb;
+  font-size: 1.3rem;
+  margin-top: 60px;
+  font-style: italic;
+}
+
+.archived-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.archived-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 24px 28px;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(187, 134, 252, 0.1);
+  backdrop-filter: blur(4px);
+}
+
+.archived-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(187, 134, 252, 0.3);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.6rem;
+  color: #ffffff;
+}
+
+.timestamp {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.chat-snippet {
+  margin: 10px 0 20px;
+  color: #dcdcdc;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.card-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.card-actions button {
+  padding: 9px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  transition: background 0.25s ease, transform 0.15s ease;
+}
+
+.card-actions button:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+.restore-btn {
+  background: linear-gradient(to right, #34d399, #059669);
+  color: white;
+}
+
+.view-btn {
+  background: linear-gradient(to right, #3b82f6, #2563eb);
+  color: #fff;
+}
+
+.delete-btn {
+  background: linear-gradient(to right, #ef4444, #b91c1c);
+  color: #fff;
+}

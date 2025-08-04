@@ -1,0 +1,72 @@
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 2rem;
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  width: 100%;
+  box-sizing: border-box; 
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+
+
+.nav-buttons {
+  display: flex;
+  gap: 15px; 
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  padding: 13px 24px;
+  border-radius: 20px;
+  background-color: transparent;
+  border: 2px solid #bb86fc;
+  color: #bb86fc;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background-color: #bb86fc;
+  color: #000;
+}
+
+@keyframes rotateCircle {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.smartchat-logo {
+  display: flex;
+  align-items: center;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #bb86fc;
+  
+}
+
+.rotating-circle {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #bb86fc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  animation: rotateCircle 4s linear infinite;
+  box-shadow: 0 0 12px #bb86fc88;
+  transition: transform 0.3s ease;
+}
+
+.rotating-circle svg {
+  font-size: 1.5rem;
+  color: #bb86fc;
+}

@@ -1,0 +1,146 @@
+/* Base container */
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  height: 100%;
+}
+
+/* Search Box */
+.search-box {
+  width: 400px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  z-index: 10;
+  transition: all 0.3s ease-in-out;
+}
+
+.search-title {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+/* Input Group */
+.search-input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+
+/* Input */
+.search-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #7c3aed;
+  background-color: #fff;
+}
+
+/* Button */
+.search-button {
+  background-color: #7c3aed;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #5b21b6;
+}
+
+/* Results */
+.search-results {
+  max-height: 300px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Chat Card */
+.chat-card {
+  background-color: #f3f4f6;
+  padding: 12px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid transparent;
+}
+
+.chat-card:hover {
+  background-color: #e5e7eb;
+  border-color: #d1d5db;
+}
+
+/* No Result */
+.no-result {
+  color: #777;
+  text-align: center;
+  font-style: italic;
+}
+
+/* ─── DARK MODE ─────────────────────────────────────── */
+
+body.dark-mode .search-box {
+  background-color: #1f1f1f;
+  /* box-shadow: 0 8px 24px rgba(255, 255, 255, 0.04); */
+}
+
+body.dark-mode .search-title {
+  color: #f4f4f4;
+}
+
+body.dark-mode .search-input {
+  background-color: #2b2b2b;
+  color: #f0f0f0;
+  border-color: #444;
+}
+
+body.dark-mode .search-input:focus {
+  background-color: #2f2f2f;
+  border-color: #9f7aea;
+}
+
+body.dark-mode .search-button {
+  background-color: #9f7aea;
+  color: #fff;
+}
+
+body.dark-mode .search-button:hover {
+  background-color: #6b46c1;
+}
+
+body.dark-mode .chat-card {
+  background-color: #2a2a2a;
+  color: #e5e5e5;
+  border-color: #3c3c3c;
+}
+
+body.dark-mode .chat-card:hover {
+  background-color: #383838;
+  border-color: #4a4a4a;
+}
+
+body.dark-mode .no-result {
+  color: #aaa;
+}

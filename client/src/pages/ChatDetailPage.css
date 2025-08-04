@@ -1,0 +1,112 @@
+/* Overall container */
+.chatdetail-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Header styles */
+.chatdetail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.chatdetail-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.chatdetail-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* Buttons */
+.export-btn,
+.summary-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  background-color: #bb86fc;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.export-btn:hover,
+.summary-btn:hover {
+  background-color: #bb86fc;
+}
+
+/* Scrollable area */
+.chatdetail-messages {
+  max-height: 600px;
+  overflow-y: auto;
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+/* Individual message */
+.chatdetail-message {
+  margin-bottom: 16px;
+  padding: 12px;
+  border-radius: 10px;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+/* User message */
+.chatdetail-user {
+  background-color: #d1e7dd;
+  align-self: flex-end;
+}
+
+/* AI message */
+.chatdetail-ai {
+  background-color: #e7eaf6;
+  align-self: flex-start;
+}
+
+.chatdetail-sender {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.chatdetail-content {
+  color: #222;
+  white-space: pre-wrap;
+}
+
+/* Loading text */
+.chatdetail-loading {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 50px;
+  color: #777;
+}
+
+/* No messages */
+.chatdetail-nomsg {
+  color: #999;
+  text-align: center;
+}
+
+/* Print compatibility */
+@media print {
+  .chatdetail-messages {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}

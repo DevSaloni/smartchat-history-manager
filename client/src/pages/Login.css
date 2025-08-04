@@ -1,0 +1,100 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--background, #f9f9f9);
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+
+}
+
+.login-card {
+  background-color: white;
+  border-radius: 1.2rem;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.login-card h2 {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.login-card p {
+  margin-bottom: 1.5rem;
+  color: #666;
+}
+
+form input {
+  width: 93%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.8rem;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+form input:focus {
+  border-color: #7f56d9;
+  outline: none;
+}
+
+.login-btns {
+  width: 100%;
+  padding: 0.79rem;
+  background: #7f56d9;
+  color: white;
+  border: none;
+  border-radius: 0.8rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-btns:hover {
+  background:#7f56d9 ;
+}
+
+.divider {
+  margin: 1.5rem 0;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+ .google-custom-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #444;
+  transition: background-color 0.3s ease;
+}
+
+.google-custom-btn:hover {
+  background-color: #f1f1f1;
+}
+
+.signup-link {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.signup-link a {
+  color: #7f56d9;
+  text-decoration: none;
+  font-weight: 500;
+}

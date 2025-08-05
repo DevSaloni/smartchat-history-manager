@@ -20,7 +20,7 @@ app.use('/api/chats', chatRoute);
 
 
 //mongoose connection
-mongoose.connect(process.env.MONGO_URL).
+mongoose.connect(process.env.MONGO_URI).
 then(() =>{
 app.listen(process.env.PORT,() =>{
     console.log("mongodb connected successfully");

@@ -96,7 +96,7 @@ const ChatArea = ({ currentChat, fetchChats }) => {
 
     try {
       if (currentChat?._id) {
-        await fetch(`http://localhost:2011/api/chats/send-message`, {
+        await fetch(`https://smartchat-history-manager.onrender.com/api/chats/send-message`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -111,7 +111,7 @@ const ChatArea = ({ currentChat, fetchChats }) => {
           currentChat.title.startsWith('Start your')
         ) {
           const newTitle = input.slice(0, 40);
-          await fetch(`http://localhost:2011/api/chats/update-title/${currentChat._id}`, {
+          await fetch(`https://smartchat-history-manager.onrender.com/api/chats/update-title/${currentChat._id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ title: newTitle }),
@@ -126,7 +126,7 @@ const ChatArea = ({ currentChat, fetchChats }) => {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer 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',
-          'HTTP-Referer': 'http://localhost:5173',
+          'HTTP-Referer': 'https://smartchat-frontened.onrender.com',
           'X-Title': 'ChatApp CodeQueen',
         },
         body: JSON.stringify({
@@ -154,7 +154,7 @@ const ChatArea = ({ currentChat, fetchChats }) => {
       setMessages(finalMessages);
 
       if (currentChat?._id) {
-        await fetch(`http://localhost:2011/api/chats/send-message`, {
+        await fetch(`https://smartchat-history-manager.onrender.com/api/chats/send-message`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

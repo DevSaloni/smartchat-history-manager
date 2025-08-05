@@ -7,7 +7,7 @@ router.post('/chat', async (req, res) => {
   const { message } = req.body;
 
   try {
-    const response = await fetch('https://smartchat-history-manager.onrender.com/api/v1/chat/completions', {
+const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${OPENROUTER_API_KEY}`,

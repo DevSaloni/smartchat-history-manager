@@ -43,7 +43,7 @@ const ChatArea = ({ currentChat, fetchChats }) => {
   }, [messages, currentChat]);
 
   useEffect(() => {
-    if (messages.length > 10) {
+    if (messages.length > 30) {
       setShowAlert(true);
     }
   }, [messages]);

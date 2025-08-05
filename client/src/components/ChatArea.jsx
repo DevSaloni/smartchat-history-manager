@@ -64,7 +64,7 @@ const ChatArea = ({ currentChat, fetchChats }) => {
   const handleArchive = async () => {
     try {
       if (currentChat?._id) {
-        const res = await fetch(`http://localhost:2011/api/chats/archive-chat/${currentChat._id}`, {
+        const res = await fetch(`https://smartchat-history-manager.onrender.com/api/chats/archive-chat/${currentChat._id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' }
         });

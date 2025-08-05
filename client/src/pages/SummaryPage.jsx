@@ -12,7 +12,7 @@ const SummaryPage = () => {
   useEffect(() => {
     const fetchSummary = async () => {
       try {
-        const res = await fetch(`http://localhost:2011/api/chats/summarize/${chatId}`);
+        const res = await fetch(`https://smartchat-history-manager.onrender.com/api/chats/summarize/${chatId}`);
         const data = await res.json();
 
         if (data.summary) {

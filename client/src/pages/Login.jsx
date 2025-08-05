@@ -22,7 +22,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:2011/api/auth/login", {
+      const res = await fetch("https://smartchat-history-manager.onrender.com/api/auth/login", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

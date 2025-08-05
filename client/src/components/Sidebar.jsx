@@ -29,7 +29,7 @@ const Sidebar = ({ user, setCurrentChat, onSearchClick }) => {
   // Fetch all chats
   const fetchChats = async () => {
     try {
-      const res = await fetch(`http://localhost:2011/api/chats/all/${localUser.id}`);
+      const res = await fetch(`https://smartchat-history-manager.onrender.com/api/chats/all/${localUser.id}`);
       const data = await res.json();
 
       // ✅ Only include non-archived chats
@@ -43,7 +43,7 @@ const Sidebar = ({ user, setCurrentChat, onSearchClick }) => {
   // Create new chat
   const handleNewChat = async () => {
     try {
-      const res = await fetch('http://localhost:2011/api/chats/save-message', {
+      const res = await fetch('https://smartchat-history-manager.onrender.com/api/chats/save-message', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -63,7 +63,7 @@ const Sidebar = ({ user, setCurrentChat, onSearchClick }) => {
   // Load full chat by ID
   const handleSelectChat = async (chatId) => {
     try {
-      const res = await fetch(`http://localhost:2011/api/chats/${chatId}`);
+      const res = await fetch(`https://smartchat-history-manager.onrender.com/api/chats/${chatId}`);
       if (!res.ok) throw new Error('Failed to fetch chat');
       const fullChat = await res.json();
       setCurrentChat(fullChat);
@@ -87,7 +87,7 @@ const Sidebar = ({ user, setCurrentChat, onSearchClick }) => {
   if (!result.isConfirmed) return;
 
   try {
-    const res = await fetch(`http://localhost:2011/api/chats/${chatId}`, {
+    const res = await fetch(`https://smartchat-history-manager.onrender.com/api/chats/${chatId}`, {
       method: 'DELETE',
     });
 

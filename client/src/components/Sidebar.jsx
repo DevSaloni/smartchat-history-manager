@@ -6,7 +6,7 @@ import { SiChatbot } from 'react-icons/si';
 import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-import './Sidebar.css';
+import './sidebar.css';
 
 const Sidebar = ({ user, setCurrentChat, onSearchClick }) => {
     const [localUser, setLocalUser] = useState({});

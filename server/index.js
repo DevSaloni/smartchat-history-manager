@@ -11,9 +11,12 @@ const openaiRouter = require("./routes/openai");
 const chatRoute = require("./routes/ChatRoute");
 
 const app = express();
-app.use(cors());
-app.use(express.json());
+app.use(cors({
+  origin: process.env.FRONTEND_URL, 
+  credentials: true
+}));
 
+app.use(express.json());
 app.use('/api/auth' ,authRoute);
 app.use('/api', openaiRouter);
 app.use('/api/chats', chatRoute);

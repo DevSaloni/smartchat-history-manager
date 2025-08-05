@@ -11,7 +11,7 @@ const ChatDetailPage = () => {
   useEffect(() => {
     const fetchChat = async () => {
       try {
-        const res = await fetch(`http://localhost:2011/api/chats/${chatId}`);
+        const res = await fetch(`https://smartchat-history-manager.onrender.com/api/chats/${chatId}`);
         const data = await res.json();
         setChatData(data);
       } catch (err) {

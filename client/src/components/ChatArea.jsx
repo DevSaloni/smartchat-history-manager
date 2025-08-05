@@ -121,20 +121,16 @@ const ChatArea = ({ currentChat, fetchChats }) => {
         }
       }
 
-      // const res = await fetch('https://smartchat-history-manager.onrender.com/api/v1/chat/completions', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      const res = await fetch('https://smartchat-history-manager.onrender.com/api/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
 
-      //     'HTTP-Referer': 'https://smartchat-frontened.onrender.com', 
-      //     'X-Title': 'ChatApp CodeQueen',
-      //   },
-   const res = await fetch('https://smartchat-history-manager.onrender.com/api/openai/chat-completion', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
+          'HTTP-Referer': 'https://smartchat-frontened.onrender.com', 
+          'X-Title': 'ChatApp CodeQueen',
+        },
+  
         body: JSON.stringify({
           model: 'meta-llama/llama-3-8b-instruct',
           messages: [

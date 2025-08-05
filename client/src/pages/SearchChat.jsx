@@ -9,7 +9,7 @@ const SearchChat = ({ setCurrentChat }) => {
 
   const handleSearch = async () => {
     try {
-      const res = await fetch(`http://localhost:2011/api/chats/search/${searchTerm}`);
+      const res = await fetch(`https://smartchat-history-manager.onrender.com/api/chats/search/${searchTerm}`);
       const data = await res.json();
       setSearchResults(data);
     } catch (err) {

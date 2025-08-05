@@ -19,7 +19,7 @@ const ArchiveChatPage = ({ fetchChats }) => {
   useEffect(() => {
     const fetchArchivedChats = async () => {
       try {
-        const res = await fetch(`http://localhost:2011/api/chats/archived-chats/${userId}`);
+        const res = await fetch(`https://smartchat-history-manager.onrender.com/api/chats/archived-chats/${userId}`);
         const data = await res.json();
         setArchivedChats(data);
       } catch (err) {
@@ -32,7 +32,7 @@ const ArchiveChatPage = ({ fetchChats }) => {
 
   const handleRestore = async (chatId) => {
     try {
-      await fetch(`http://localhost:2011/api/chats/restore-chat/${chatId}`, {
+      await fetch(`https://smartchat-history-manager.onrender.com/api/chats/restore-chat/${chatId}`, {
         method: 'PUT',
       });
       setArchivedChats(prev => prev.filter(chat => chat._id !== chatId));
@@ -61,7 +61,7 @@ const handleDelete = async (chatId) => {
   if (!result.isConfirmed) return;
 
   try {
-    await fetch(`http://localhost:2011/api/chats/${chatId}`, {
+    await fetch(`https://smartchat-history-manager.onrender.com/api/chats/${chatId}`, {
       method: 'DELETE',
     });
     setArchivedChats((prev) => prev.filter((chat) => chat._id !== chatId));

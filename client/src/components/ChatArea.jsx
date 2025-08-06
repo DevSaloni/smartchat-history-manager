@@ -164,7 +164,7 @@ const res = await fetch('https://smartchat-history-manager.onrender.com/api/v1/c
             message: { role: 'ai', content: aiText },
           }),
         });
-      }
+      
 
     } catch (err) {
       console.error(err);

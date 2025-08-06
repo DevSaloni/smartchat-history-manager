@@ -4,25 +4,27 @@ const router = express.Router();
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 
 router.post('/chat', async (req, res) => {
-  const { message } = req.body;
+  const { model = 'meta-llama/llama-3-8b-instruct', messages = [] } = req.body;
 
   try {
-const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-       model: 'meta-llama/llama-3-8b-instruct',// you can choose other free models from openrouter docs
-        messages: [{ role: 'user', content: message }],
+        model,
+        messages,
       }),
     });
 
     const data = await response.json();
+
     if (data.choices && data.choices.length > 0) {
       res.json({ reply: data.choices[0].message.content });
     } else {
+      console.error('Invalid response from OpenRouter:', data);
       res.status(500).json({ error: 'No response from AI' });
     }
 

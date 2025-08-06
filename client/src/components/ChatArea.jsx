@@ -146,7 +146,7 @@ const ChatArea = ({ currentChat, fetchChats }) => {
     });
 
     const data = await res.json();
-    const aiText = data.choices?.[0]?.message?.content || 'No response.';
+   const aiText = data.reply || 'No response.';
     const finalMessages = [...newMessages, { sender: 'ai', text: aiText }];
     setMessages(finalMessages);
 

@@ -7,17 +7,20 @@ router.post('/chat', async (req, res) => {
   const { model = 'meta-llama/llama-3-8b-instruct', messages = [] } = req.body;
 
   try {
-    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model,
-        messages,
-      }),
-    });
+   const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+  method: "POST",
+  headers: {
+    "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+    "Content-Type": "application/json",
+    "HTTP-Referer": "https://yourfrontend.onrender.com", // correct domain
+    "X-Title": "chat-ui",
+  },
+  body: JSON.stringify({
+    model: "mistralai/mixtral-8x7b",
+    messages: [{ role: "user", content: message }],
+  }),
+});
+
 
     const data = await response.json();
 

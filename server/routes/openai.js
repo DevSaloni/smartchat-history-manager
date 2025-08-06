@@ -12,7 +12,7 @@ router.post('/chat', async (req, res) => {
   headers: {
     "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
     "Content-Type": "application/json",
-    "HTTP-Referer": "https://yourfrontend.onrender.com", // correct domain
+    "HTTP-Referer": "https://smartchat-frontened.onrender.com", 
     "X-Title": "chat-ui",
   },
   body: JSON.stringify({

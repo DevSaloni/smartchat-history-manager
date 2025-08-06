@@ -1,3 +1,6 @@
+const express = require('express');
+const router = express.Router();
+
 router.post('/chat', async (req, res) => {
   const { model = 'meta-llama/llama-3-8b-instruct', messages = [] } = req.body;
 
@@ -12,7 +15,7 @@ router.post('/chat', async (req, res) => {
       },
       body: JSON.stringify({
         model,
-        messages,  // <-- pass the whole messages array from request
+        messages,  
       }),
     });
 
@@ -30,3 +33,4 @@ router.post('/chat', async (req, res) => {
     res.status(500).json({ error: 'Error communicating with OpenRouter API' });
   }
 });
+module.exports = router;

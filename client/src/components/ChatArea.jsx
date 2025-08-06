@@ -87,92 +87,87 @@ const ChatArea = ({ currentChat, fetchChats }) => {
   };
 
   const sendMessage = async () => {
-    if (!input.trim()) return;
+  if (!input.trim()) return;
 
-    const newMessages = [...messages, { sender: 'user', text: input }];
-    setMessages(newMessages);
-    setInput('');
-    setLoading(true);
+  const newMessages = [...messages, { sender: 'user', text: input }];
+  setMessages(newMessages);
+  setInput('');
+  setLoading(true);
 
-    try {
-      if (currentChat?._id) {
-        await fetch(`https://smartchat-history-manager.onrender.com/api/chats/send-message`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            chatId: currentChat._id,
-            message: { role: 'user', content: input },
-          }),
-        });
-
-        if (
-          !currentChat.title ||
-          currentChat.title === 'New Chat' ||
-          currentChat.title.startsWith('Start your')
-        ) {
-          const newTitle = input.slice(0, 40);
-          await fetch(`https://smartchat-history-manager.onrender.com/api/chats/update-title/${currentChat._id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: newTitle }),
-          });
-
-          fetchChats?.();
-        }
-      }
-
-const res = await fetch('https://smartchat-history-manager.onrender.com/api/v1/chat', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    message: input  // send only user input
-  }),
-});
-
+  try {
+    if (currentChat?._id) {
+      await fetch(`https://smartchat-history-manager.onrender.com/api/chats/send-message`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          model: 'meta-llama/llama-3-8b-instruct',
-          messages: [
-            {
-              role: 'system',
-              content: `You're an expert developer and teacher. Always explain answers in:
-                - Simple and clear bullet points.
-                - Add emojis that match the point.
-                - Use line breaks between bullets.
-                - Format like ChatGPT replies with organized sections.`,
-            },
-            ...newMessages.map(msg => ({
-              role: msg.sender === 'user' ? 'user' : 'ai',
-              content: msg.text,
-            })),
-          ],
+          chatId: currentChat._id,
+          message: { role: 'user', content: input },
         }),
       });
 
-      const data = await res.json();
-      const aiText = data.choices?.[0]?.message?.content || 'No response.';
-      const finalMessages = [...newMessages, { sender: 'ai', text: aiText }];
-      setMessages(finalMessages);
-
-      if (currentChat?._id) {
-        await fetch(`https://smartchat-history-manager.onrender.com/api/chats/send-message`, {
-          method: 'POST',
+      if (
+        !currentChat.title ||
+        currentChat.title === 'New Chat' ||
+        currentChat.title.startsWith('Start your')
+      ) {
+        const newTitle = input.slice(0, 40);
+        await fetch(`https://smartchat-history-manager.onrender.com/api/chats/update-title/${currentChat._id}`, {
+          method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            chatId: currentChat._id,
-            message: { role: 'ai', content: aiText },
-          }),
+          body: JSON.stringify({ title: newTitle }),
         });
-      
 
-    } catch (err) {
-      console.error(err);
-      setMessages(prev => [...prev, { sender: 'ai', text: 'Something went wrong 😢' }]);
-    } finally {
-      setLoading(false);
+        fetchChats?.();
+      }
     }
-  };
+
+    const res = await fetch('https://smartchat-history-manager.onrender.com/api/v1/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'meta-llama/llama-3-8b-instruct',
+        messages: [
+          {
+            role: 'system',
+            content: `You're an expert developer and teacher. Always explain answers in:
+              - Simple and clear bullet points.
+              - Add emojis that match the point.
+              - Use line breaks between bullets.
+              - Format like ChatGPT replies with organized sections.`,
+          },
+          ...newMessages.map(msg => ({
+            role: msg.sender === 'user' ? 'user' : 'ai',
+            content: msg.text,
+          })),
+        ],
+      }),
+    });
+
+    const data = await res.json();
+    const aiText = data.choices?.[0]?.message?.content || 'No response.';
+    const finalMessages = [...newMessages, { sender: 'ai', text: aiText }];
+    setMessages(finalMessages);
+
+    if (currentChat?._id) {
+      await fetch(`https://smartchat-history-manager.onrender.com/api/chats/send-message`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chatId: currentChat._id,
+          message: { role: 'ai', content: aiText },
+        }),
+      });
+    }
+
+  } catch (err) {
+    console.error(err);
+    setMessages(prev => [...prev, { sender: 'ai', text: 'Something went wrong 😢' }]);
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') sendMessage();

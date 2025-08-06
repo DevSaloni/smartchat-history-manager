@@ -16,7 +16,7 @@ router.post('/chat', async (req, res) => {
     "X-Title": "chat-ui",
   },
   body: JSON.stringify({
-    model: "mistralai/mixtral-8x7b",
+    model: "meta-llama/llama-3-8b-instruct",
     messages: [{ role: "user", content: message }],
   }),
 });

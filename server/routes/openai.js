@@ -2,33 +2,35 @@ const express = require('express');
 const router = express.Router();
 
 router.post('/chat', async (req, res) => {
-  const { model = 'meta-llama/llama-3-8b-instruct', messages = [] } = req.body;
+  const { message } = req.body;
 
   try {
-   const response = await fetch("https://openrouter.ai/api/chat/completions", {
-  method: "POST",
-  headers: {
-    "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
-    "Content-Type": "application/json",
-    "Referer": process.env.FRONTEND_URL,
-    "X-Title": "chat-ui"
-  },
-  body: JSON.stringify({ model, messages }),
-});
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: "mistralai/mistral-7b-instruct",
+        messages: [{ role: "user", content: message }],
+        temperature: 0.7
+      })
+    });
 
     const data = await response.json();
 
-    if (data.choices && data.choices.length > 0) {
-      res.json({ reply: data.choices[0].message.content });
-    } else {
-      console.error('Invalid response from OpenRouter:', data);
-      res.status(500).json({ error: 'No response from AI' });
+    if (!response.ok) {
+      console.error("OpenRouter API error:", data);
+      return res.status(response.status).json({ error: data });
     }
 
+    res.status(200).json(data);
   } catch (error) {
-    console.error('OpenRouter API error:', error);
-    res.status(500).json({ error: 'Error communicating with OpenRouter API' });
+    console.error("Server error:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
+
 
 module.exports = router;

@@ -5,16 +5,16 @@ router.post('/chat', async (req, res) => {
   const { model = 'meta-llama/llama-3-8b-instruct', messages = [] } = req.body;
 
   try {
-    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,  
-        "Content-Type": "application/json",
-        "Referer": "https://smartchat-frontened.onrender.com", 
-        "X-Title": "chat-ui",
-      },
-      body: JSON.stringify({ model, messages }),
-    });
+   const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+  method: "POST",
+  headers: {
+    "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+    "Content-Type": "application/json",
+    "Referer": process.env.FRONTEND_URL,
+    "X-Title": "chat-ui"
+  },
+  body: JSON.stringify({ model, messages }),
+});
 
     const data = await response.json();
 

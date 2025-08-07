@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 app.use('/api/auth' ,authRoute);
-app.use('/api', openaiRouter);
+app.use('/api/v1/chat', openaiRouter);
 app.use('/api/chats', chatRoute);
 
 

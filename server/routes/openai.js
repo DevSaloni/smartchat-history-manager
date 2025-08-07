@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-router.post('/chat', async (req, res) => {
+router.post('/', async (req, res) => {
   const { message } = req.body;
 
   try {

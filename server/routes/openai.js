@@ -8,7 +8,7 @@ router.post('/chat', async (req, res) => {
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,  
         "Content-Type": "application/json",
         "HTTP-Referer": "https://smartchat-frontened.onrender.com",
         "X-Title": "chat-ui",

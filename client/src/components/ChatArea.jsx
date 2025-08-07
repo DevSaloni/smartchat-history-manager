@@ -121,7 +121,7 @@ const ChatArea = ({ currentChat, fetchChats }) => {
       }
     }
 
-    const res = await fetch('https://smartchat-history-manager.onrender.com/api/v1/chat', {
+    const res = await fetch('https://smartchat-history-manager.onrender.com/api/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

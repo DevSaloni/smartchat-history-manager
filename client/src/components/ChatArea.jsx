@@ -145,10 +145,16 @@ const ChatArea = ({ currentChat, fetchChats }) => {
       }),
     });
 
-    const data = await res.json();
-   const aiText = data.reply || 'No response.';
-    const finalMessages = [...newMessages, { sender: 'ai', text: aiText }];
-    setMessages(finalMessages);
+   if (!res.ok) {
+  const errData = await res.json();
+  console.error('Backend error:', errData);
+  setMessages(prev => [...prev, { sender: 'ai', text: 'Something went wrong 😢' }]);
+  setLoading(false);
+  return;
+}
+
+const data = await res.json();
+const aiText = data.reply || 'No response.';
 
     if (currentChat?._id) {
       await fetch(`https://smartchat-history-manager.onrender.com/api/chats/send-message`, {

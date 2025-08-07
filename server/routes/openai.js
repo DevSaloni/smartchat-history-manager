@@ -10,13 +10,10 @@ router.post('/chat', async (req, res) => {
       headers: {
         "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,  
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://smartchat-frontened.onrender.com",
+        "Referer": "https://smartchat-frontened.onrender.com", 
         "X-Title": "chat-ui",
       },
-      body: JSON.stringify({
-        model,
-        messages,  
-      }),
+      body: JSON.stringify({ model, messages }),
     });
 
     const data = await response.json();
@@ -33,4 +30,5 @@ router.post('/chat', async (req, res) => {
     res.status(500).json({ error: 'Error communicating with OpenRouter API' });
   }
 });
+
 module.exports = router;

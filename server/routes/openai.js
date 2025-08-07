@@ -5,7 +5,7 @@ router.post('/chat', async (req, res) => {
   const { model = 'meta-llama/llama-3-8b-instruct', messages = [] } = req.body;
 
   try {
-   const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+   const response = await fetch("https://openrouter.ai/api/chat/completions", {
   method: "POST",
   headers: {
     "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,

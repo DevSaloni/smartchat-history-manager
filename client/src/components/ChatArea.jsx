@@ -97,7 +97,7 @@ const ChatArea = ({ currentChat, fetchChats }) => {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-             userId: user.id,
+             userId: user.id || user._id, 
             chatId: currentChat._id,
             message: { role: 'user', content: input },
           }),
@@ -127,7 +127,7 @@ const ChatArea = ({ currentChat, fetchChats }) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          userId: user.id, 
+        userId: user.id || user._id, 
           model: 'meta-llama/llama-3-8b-instruct',
           messages: [
             {
@@ -165,7 +165,7 @@ const ChatArea = ({ currentChat, fetchChats }) => {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-             userId: user.id,
+          userId: user.id || user._id, 
             chatId: currentChat._id,
             message: { role: 'assistant', content: aiText },
           }),

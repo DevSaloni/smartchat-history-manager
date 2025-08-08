@@ -189,4 +189,4 @@ useEffect(() => {
   );
 };
 
-export default Sidebar;  for that file gives
+export default Sidebar;  

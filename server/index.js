@@ -11,6 +11,8 @@ const authRoute = require("./routes/auth");
 const openaiRouter = require("./routes/openai"); // handles OpenRouter API calls
 const chatRoute = require("./routes/ChatRoute");
 
+console.log("OpenRouter API Key Loaded:", process.env.OPENROUTER_API_KEY ? "Yes" : "No"); // ✅ Check if key is loaded
+
 const app = express();
 
 // CORS setup

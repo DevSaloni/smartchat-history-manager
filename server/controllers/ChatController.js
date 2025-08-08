@@ -1,5 +1,5 @@
 const Chat = require("../models/Chat");
-
+const User = require('../models/userModel');
 // Save user message and response
 const saveMessage = async (req, res) => {
   try {
@@ -92,6 +92,7 @@ const deleteChat = async (req, res) => {
 
 
 
+
 const sendMessage = async (req, res) => {
   const { userId, chatId, message } = req.body;
 
@@ -99,15 +100,23 @@ const sendMessage = async (req, res) => {
     return res.status(401).json({ message: 'User not found.', code: 401 });
   }
 
-  // Optional: Verify user owns this chat (if you want strict security)
+  // Check user existence
+  const user = await User.findById(userId);
+  if (!user) {
+    return res.status(401).json({ message: 'User not found.', code: 401 });
+  }
+
+  // Find chat
   const chat = await Chat.findById(chatId);
   if (!chat) return res.status(404).json({ message: 'Chat not found.' });
-  if (chat.userId !== userId) {
+
+  // Compare ObjectIds properly
+  if (!chat.userId.equals(mongoose.Types.ObjectId(userId))) {
     return res.status(403).json({ message: 'Unauthorized access to chat.' });
   }
 
   if (chat.title === 'Start your conversation here...') {
-    chat.title = message.content.slice(0, 40); 
+    chat.title = message.content.slice(0, 40);
   }
 
   chat.messages.push(message);

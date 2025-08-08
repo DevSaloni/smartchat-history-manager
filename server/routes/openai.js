@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Chat = require('../models/chat'); // adjust the path as needed
+const Chat = require('../models/Chat'); // adjust the path as needed
 
 router.post('/', async (req, res) => {
   const { userId, model = "meta-llama/llama-3-8b-instruct", messages = [] } = req.body;

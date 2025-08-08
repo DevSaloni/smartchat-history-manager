@@ -5,7 +5,7 @@ const chatSchema = new mongoose.Schema({
   title: { type: String, default: 'Untitled Chat' },
   messages: [
     {
-      role: { type: String, enum: ['user', 'ai'], required: true },
+   role: { type: String, enum: ['user', 'assistant'], required: true },
       content: { type: String, required: true }
     }
   ],

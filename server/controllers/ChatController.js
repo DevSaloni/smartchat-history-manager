@@ -1,13 +1,14 @@
+const mongoose = require('mongoose'); // ✅ Added this
 const { ObjectId } = require('mongoose').Types;
 
 const Chat = require("../models/Chat");
 const User = require('../models/userModel');
+
 // Save user message and response
 const saveMessage = async (req, res) => {
   try {
     const { userId, title, messages } = req.body;
 
-    // Check for empty content
     if (!messages || messages.length === 0 || !messages[0].content) {
       return res.status(400).json({ error: 'Message content is required.' });
     }
@@ -26,7 +27,6 @@ const saveMessage = async (req, res) => {
   }
 };
 
-
 // Get all recent chats (titles) for a user
 const getAllChats = async (req, res) => {
   try {
@@ -39,24 +39,21 @@ const getAllChats = async (req, res) => {
       .sort({ createdAt: -1 })
       .select('title createdAt messages');
 
-    res.status(200).json(chats || []); // always return array
+    res.status(200).json(chats || []);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
-
-
 
 const getChatById = async (req, res) => {
   try {
     const chat = await Chat.findById(req.params.chatId);
     if (!chat) return res.status(404).json({ message: "Chat not found" });
-    res.status(200).json(chat);  // returns full chat including messages array
+    res.status(200).json(chat);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
-
 
 const addMessageToChat = async (req, res) => {
   try {
@@ -82,7 +79,6 @@ const addMessageToChat = async (req, res) => {
   }
 };
 
-//delete the chats
 const deleteChat = async (req, res) => {
   try {
     const { chatId } = req.params;
@@ -98,9 +94,6 @@ const deleteChat = async (req, res) => {
   }
 };
 
-
-
-
 const sendMessage = async (req, res) => {
   const { userId, chatId, message } = req.body;
 
@@ -108,18 +101,16 @@ const sendMessage = async (req, res) => {
     return res.status(401).json({ message: 'User not found.', code: 401 });
   }
 
-  // Check user existence
   const user = await User.findById(userId);
   if (!user) {
     return res.status(401).json({ message: 'User not found.', code: 401 });
   }
 
-  // Find chat
   const chat = await Chat.findById(chatId);
   if (!chat) return res.status(404).json({ message: 'Chat not found.' });
 
-  // Compare ObjectIds properly
-  if (!chat.userId.equals(mongoose.Types.ObjectId(userId))) {
+  // ✅ Use ObjectId import instead of mongoose.Types.ObjectId
+  if (!chat.userId.equals(new ObjectId(userId))) {
     return res.status(403).json({ message: 'Unauthorized access to chat.' });
   }
 
@@ -132,7 +123,6 @@ const sendMessage = async (req, res) => {
 
   res.status(200).json({ chat });
 };
-
 
 // Update chat title
 const updateChatTitle = async (req, res) => {
@@ -159,13 +149,12 @@ const updateChatTitle = async (req, res) => {
   }
 };
 
-// Search chats by title
 const searchChats = async (req, res) => {
   try {
     const { query } = req.params;
 
     const chats = await Chat.find({
-      title: { $regex: query, $options: 'i' }, 
+      title: { $regex: query, $options: 'i' },
     });
 
     res.status(200).json(chats);
@@ -175,12 +164,11 @@ const searchChats = async (req, res) => {
   }
 };
 
-//archieved chat handle
 const handleArchiveChat = async (req, res) => {
   try {
     const chat = await Chat.findByIdAndUpdate(
       req.params.chatId,
-      { isArchived: true , archivedAt: new Date()},
+      { isArchived: true, archivedAt: new Date() },
       { new: true }
     );
     if (!chat) return res.status(404).json({ error: 'Chat not found' });
@@ -200,16 +188,15 @@ const getArchiveChat = async (req, res) => {
   }
 };
 
-const restoreChat = async(req,res) =>{
+const restoreChat = async (req, res) => {
   try {
     const chat = await Chat.findByIdAndUpdate(req.params.chatId, { isArchived: false }, { new: true });
     res.json(chat);
   } catch (err) {
     res.status(500).json({ error: 'Failed to restore chat' });
   }
-}
+};
 
-/// summarized the chat 
 const summarizeChat = async (req, res) => {
   const { chatId } = req.params;
 
@@ -229,11 +216,11 @@ const summarizeChat = async (req, res) => {
     const apiResponse = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-    'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "meta-llama/llama-3-8b-instruct", 
+        model: "meta-llama/llama-3-8b-instruct",
         messages: [
           { role: "system", content: "You are a helpful assistant that summarizes chat." },
           { role: "user", content: prompt }

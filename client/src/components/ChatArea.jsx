@@ -126,6 +126,7 @@ const ChatArea = ({ currentChat, fetchChats }) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          userId: user.id, 
           model: 'meta-llama/llama-3-8b-instruct',
           messages: [
             {

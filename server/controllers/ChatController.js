@@ -93,13 +93,21 @@ const deleteChat = async (req, res) => {
 
 
 const sendMessage = async (req, res) => {
-  const { chatId, message } = req.body;
+  const { userId, chatId, message } = req.body;
 
+  if (!userId) {
+    return res.status(401).json({ message: 'User not found.', code: 401 });
+  }
+
+  // Optional: Verify user owns this chat (if you want strict security)
   const chat = await Chat.findById(chatId);
+  if (!chat) return res.status(404).json({ message: 'Chat not found.' });
+  if (chat.userId !== userId) {
+    return res.status(403).json({ message: 'Unauthorized access to chat.' });
+  }
 
-  // Only update title if it's still the default
   if (chat.title === 'Start your conversation here...') {
-    chat.title = message.content.slice(0, 40); // update to actual first message
+    chat.title = message.content.slice(0, 40); 
   }
 
   chat.messages.push(message);
@@ -107,6 +115,7 @@ const sendMessage = async (req, res) => {
 
   res.status(200).json({ chat });
 };
+
 
 // Update chat title
 const updateChatTitle = async (req, res) => {

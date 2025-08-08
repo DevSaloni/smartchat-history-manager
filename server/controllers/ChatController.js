@@ -28,15 +28,21 @@ const saveMessage = async (req, res) => {
 // Get all recent chats (titles) for a user
 const getAllChats = async (req, res) => {
   try {
-    const chats = await Chat.find({ userId: req.params.userId })
-      .sort({ createdAt: -1 })
-      .select('title createdAt messages'); // include messages
+    const { userId } = req.params;
+    if (!userId) {
+      return res.status(400).json({ error: "User ID is required" });
+    }
 
-    res.status(200).json(chats);
+    const chats = await Chat.find({ userId })
+      .sort({ createdAt: -1 })
+      .select('title createdAt messages');
+
+    res.status(200).json(chats || []); // always return array
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
+
 
 
 const getChatById = async (req, res) => {

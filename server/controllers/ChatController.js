@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const { ObjectId } = require('mongoose').Types;
 
 const Chat = require("../models/Chat");
 const User = require('../models/userModel');

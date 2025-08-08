@@ -1,19 +1,20 @@
 const express = require('express');
 const router = express.Router();
 
+
 router.post('/', async (req, res) => {
-  const { message } = req.body;
+  const { model = "meta-llama/llama-3-8b-instruct", messages = [] } = req.body;
 
   try {
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+        'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: "mistralai/mistral-7b-instruct",
-        messages: [{ role: "user", content: message }],
+        model,
+        messages,  
         temperature: 0.7
       })
     });
@@ -25,12 +26,14 @@ router.post('/', async (req, res) => {
       return res.status(response.status).json({ error: data });
     }
 
-    res.status(200).json(data);
+    // Send only the reply content to frontend
+    const aiReply = data?.choices?.[0]?.message?.content || "No response.";
+    res.status(200).json({ reply: aiReply });
+
   } catch (error) {
     console.error("Server error:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
 
 module.exports = router;

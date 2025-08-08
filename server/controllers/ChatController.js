@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const Chat = require("../models/Chat");
 const User = require('../models/userModel');
 // Save user message and response

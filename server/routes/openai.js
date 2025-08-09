@@ -5,9 +5,7 @@ const Chat = require('../models/Chat'); // adjust the path as needed
 router.post('/', async (req, res) => {
   const { userId, model = "meta-llama/llama-3-8b-instruct", messages = [] } = req.body;
 
-  if (!userId) {
-    return res.status(401).json({ message: 'User not found.' });
-  }
+ 
 
   try {
     // Call OpenRouter API

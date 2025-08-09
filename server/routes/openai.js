@@ -4,7 +4,11 @@ const Chat = require('../models/Chat'); // adjust the path as needed
 
 router.post('/', async (req, res) => {
   const { userId, model = "meta-llama/llama-3-8b-instruct", messages = [] } = req.body;
-
+  
+if (!userId) {
+    userId = "000000000000000000000000"; // dummy ObjectId
+  }
+  
  if (!process.env.OPENROUTER_API_KEY) {
     return res.status(500).json({ error: "Missing OpenRouter API key in environment variables" });
   }
